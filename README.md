@@ -4,18 +4,18 @@ A Django-powered web application that helps users track their expenses category-
 
 ## Features
 
-- ✅ Add and categorize expenses
-- 📊 View expenses for:
+-  Add and categorize expenses
+-  View expenses for:
   - Past 1 week
   - Past 1 month
   - Past 1 year
-- 💸 Set and manage a monthly budget
-- 📈 Visual reports using:
+-  Set and manage a monthly budget
+- Visual reports using:
   - **Pie charts** for category-wise expense distribution
   - **Bar charts** for comparative analysis
-- 🔔 Get insights on whether you're within budget or overspending
+-  Get insights on whether you're within budget or overspending
 
-## 🛠️ Tech Stack
+## 🛠 Tech Stack
 
 - **Frontend:** HTML, CSS  
 - **Backend:** Django, Python  
