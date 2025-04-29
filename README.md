@@ -59,18 +59,22 @@ mysite/
 ## Follow these steps to set up and run the Expense Tracker project locally on your system:
 
 1. 📥 Clone the Repository
+
 git clone https://github.com/28naitik/Expense-Tracker-Project.git
 cd Expense-Tracker-Project/mysite
 
 3. Create and Activate a Virtual Environment (Recommended)
+
 For Windows:
 python -m venv venv
 venv\Scripts\activate
+
 For macOS/Linux:
 python3 -m venv venv
 source venv/bin/activate
 
 4. Install Required Dependencies
+
 If you have a requirements.txt file:
 pip install -r requirements.txt
 Or manually install the required packages:
