@@ -1,4 +1,3 @@
-/* General Styling */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f8fafc;
@@ -58,7 +57,6 @@ body {
     color: white;
 }
 
-/* Form Section */
 form {
     background-color: #ffffff;
     margin: 100px auto 30px;
@@ -76,8 +74,8 @@ form {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    width: 100%; /* Add this to take full width of parent */
-    justify-content: center; /* Add this to center the form groups */
+    width: 100%; 
+    justify-content: center; 
 }
 
 .form-group {
@@ -103,7 +101,7 @@ form {
     box-sizing: border-box;
 }
 
-/* Buttons */
+
 button[type="submit"] {
     background-color: #4CAF50;
     color: white;
@@ -120,7 +118,7 @@ button[type="submit"]:hover {
     background-color: #45a049;
 }
 
-/* Expense Header & Row */
+
 .expense-header, .expense-row {
     display: flex;
     justify-content: space-between;
@@ -130,9 +128,9 @@ button[type="submit"]:hover {
 }
 
 .expense-table {
-    width: 80%; /* Adjust the width as necessary */
-    float: right; /* Moves the table to the right */
-    margin: 20px; /* Optional: Adjust spacing around the table */
+    width: 80%; 
+    float: right; 
+    margin: 20px; 
 }
 
 .expense-header {
@@ -157,7 +155,6 @@ button[type="submit"]:hover {
     font-size: 16px;
 }
 
-/* Delete Button */
 .delete-form {
     margin: 0;
     padding: 0;
@@ -179,7 +176,6 @@ button[type="submit"]:hover {
     color: #d32f2f;
 }
 
-/* Total Expenses */
 .px-80 {
     text-align: right;
     padding: 10px 40px;
@@ -188,7 +184,6 @@ button[type="submit"]:hover {
     font-size: 18px;
 }
 
-/* Flex Utility */
 .flex {
     display: flex;
     gap: 20px;
@@ -202,7 +197,7 @@ button[type="submit"]:hover {
     font-weight: bold;
 }
 
-/* Chart Images */
+
 img {
     max-width: 100%;
     border-radius: 8px;
@@ -210,7 +205,7 @@ img {
     margin-top: 20px;
 }
 
-/* Responsive Design */
+
 @media only screen and (max-width: 768px) {
     .form-container,
     .flex {
@@ -233,17 +228,17 @@ img {
     }
 }
 .w-full.bg-gray-100 {
-    width: 100%;  /* ← Forces full width */
+    width: 100%;
     background-color: #f3f4f6;
 }
 
 .container {
-    width: 100%;  /* ← Ensures container fills available space */
-    max-width: 100%;  /* ← No max-width restriction */
-    padding: 0 1rem;  /* ← Adds padding only on sides */
+    width: 100%;  
+    max-width: 100%;
+    padding: 0 1rem;  
 }
 
 form {
-    max-width: none !important;  /* ← Removes any max-width */
-    width: 100% !important;  /* ← Forces full width */
+    max-width: none !important;  
+    width: 100% !important; 
 }
