@@ -1,0 +1,176 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load custom_filters %}
+
+
+{% block body %}
+<div class="header">
+    <div class="logo">
+        <!-- <span class="logo-text">Expense Tracker</span> -->
+    </div>
+    <div class="navbar">
+        <ul class="navbar-list">
+            <li><a href="#" class="navbar-item">Profile</a></li>
+            <li><a href="#" class="navbar-item">About</a></li>
+            <li><a href="#" class="navbar-item">Logout</a></li>
+        </ul>
+    </div>
+</div>
+<div class="w-full bg-gray-100 min-h-screen py-10">  <!-- ← FULL-WIDTH BACKGROUND -->
+    <div class="container mx-auto px-4">  <!-- ← CONTAINER WITH PROPER PADDING -->
+<div class="m-10 font-bold text-center text-3xl">Add Expense</div>
+<form class="bg-white shadow-lg rounded-lg p-8 w-full" method="post">  <!-- ← w-full -->
+<form class="shadow-lg m-10 rounded-lg p-8 bg-gray-100" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="submit_expense" value="1">
+    <div class="form-container flex gap-5">
+        <div class="form-group w-full md:w-1/3">
+            <label for="name" class="block text-lg font-medium text-gray-700">Expense name</label>
+            <div class="border border-gray-300 rounded-lg p-3 mt-2">{{ expense_form.name }}</div>
+        </div>
+        <div class="form-group w-full md:w-1/3">
+            <label for="amount" class="block text-lg font-medium text-gray-700">Amount</label>
+            <div class="border border-gray-300 rounded-lg p-3 mt-2">{{ expense_form.amount }}</div>
+        </div>
+        <div class="form-group w-full md:w-1/3">
+            <label for="category" class="block text-lg font-medium text-gray-700">Category</label>
+            <div class="border border-gray-300 rounded-lg p-3 mt-2">{{ expense_form.category }}</div>
+        </div>
+    </div>
+    <div class="w-full text-center mt-8">
+        <button class="bg-green-500 px-6 py-3 rounded-lg text-white font-bold shadow-lg hover:bg-green-600 transition duration-300">Add Expense</button>
+    </div>
+</form>
+
+<!-- 💡 BUDGET FORM -->
+<div class="m-10 font-bold text-center text-3xl">Set Monthly Budget</div>
+<form class="shadow-lg m-10 rounded-lg p-8 bg-yellow-50" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="submit_budget" value="1">
+    <div class="form-container flex gap-5">
+        <div class="form-group w-full md:w-1/2">
+            <label for="month" class="block text-lg font-medium text-gray-700">Month</label>
+            <div class="border border-gray-300 rounded-lg p-3 mt-2">{{ budget_form.month }}</div>
+        </div>
+        <div class="form-group w-full md:w-1/2">
+            <label for="amount" class="block text-lg font-medium text-gray-700">Budget Amount</label>
+            <div class="border border-gray-300 rounded-lg p-3 mt-2">{{ budget_form.amount }}</div>
+        </div>
+    </div>
+    <div class="w-full text-center mt-8">
+        <button class="bg-yellow-500 px-6 py-3 rounded-lg text-white font-bold shadow-lg hover:bg-yellow-600 transition duration-300">Set Budget</button>
+    </div>
+</form>
+
+<!-- 💰 Budget Summary -->
+{% if current_month_budget %}
+<div class="w-2/3 mx-auto my-10 shadow-lg rounded-lg p-5 bg-gray-100">
+    <h1 class="font-bold text-2xl text-center mb-5">Current Month Budget Summary</h1>
+    <div class="grid grid-cols-3 text-center">
+        <div>
+            <p class="text-gray-600">Budget Set</p>
+            <p class="text-xl text-blue-500 font-bold">${{ current_month_budget.amount|intcomma }}</p>
+        </div>
+        <div>
+            <p class="text-gray-600">Spent</p>
+            <p class="text-xl text-red-500 font-bold">${{ spent_this_month|intcomma }}</p>
+        </div>
+        <div>
+            <p class="text-gray-600">Remaining</p>
+            <p class="text-xl text-green-500 font-bold">
+                {% if budget_remaining >= 0 %}
+                    ${{ budget_remaining|intcomma }}
+                {% else %}
+                    -${{ budget_remaining|abs|intcomma }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="m-10 font-bold text-center">Expenses</div>
+<div class="shadow-lg m-10 rounded-lg">
+    <div class="expense-header grid grid-cols-6 gap-2 p-4 bg-gray-200 font-bold">
+        <span>Name</span>
+        <span>Amount</span>
+        <span>Date</span>
+        <span>Category</span>
+        <span>Edit</span>
+        <span>Delete</span>
+    </div>
+    <hr class="m-0">
+    {% for expense in expenses %}
+    <div class="expense-row grid grid-cols-6 gap-2 p-3 items-center border-b">
+        <span>{{ expense.name|title }}</span>
+        <span>${{ expense.amount|intcomma }}</span>
+        <span>{{ expense.date }}</span>
+        <span>{{ expense.category|title }}</span>
+        <span><a href="{% url 'edit' expense.id %}" class="text-blue-500 hover:text-blue-700">Edit</a></span>
+        <span>
+            <form method="post" action="{% url 'delete' expense.id %}">
+                {% csrf_token %}
+                <button type="submit" name="delete" class="text-red-500 hover:text-red-700">Delete</button>
+            </form>
+        </span>
+    </div>
+    {% endfor %}
+    <div class="px-10 py-5">
+        <span class="font-bold text-green-500 text-lg">Total: ${{ total_expenses.amount__sum|intcomma }}</span>
+    </div>
+</div>
+
+<div class="flex gap-10">
+    <div class="w-1/3 shadow-lg rounded-lg p-5">
+        <h1 class="font-bold text-gray-500 text-xl">LAST 365 DAYS</h1>
+        <h1 class="my-5 text-2xl text-green-500 font-bold">${{ yearly_sum.amount__sum|intcomma }}</h1>
+    </div>
+    <div class="w-1/3 shadow-lg rounded-lg p-5">
+        <h1 class="font-bold text-gray-500 text-xl">LAST 30 DAYS</h1>
+        <h1 class="my-5 text-2xl text-green-500 font-bold">${{ monthly_sum.amount__sum|intcomma }}</h1>
+    </div>
+    <div class="w-1/3 shadow-lg rounded-lg p-5">
+        <h1 class="font-bold text-gray-500 text-xl">LAST 7 DAYS</h1>
+        <h1 class="my-5 text-2xl text-green-500 font-bold">${{ weekly_sum.amount__sum|intcomma }}</h1>
+    </div>
+</div>
+
+<div class="flex gap-10">
+    <div class="w-1/2 shadow-lg rounded-lg p-5">
+        <div class="font-bold text-lg">Past 30 days sum expenses</div>
+        <hr class="my-5">
+        <div id="30-day-table">
+            {% for daily_sum in daily_sums %}
+            <div class="flex justify-between px-5 py-3">
+                <span>{{ daily_sum.date }}</span>
+                <span class="text-green-500">$ {{ daily_sum.sum }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="w-1/2 shadow-lg rounded-lg p-5">
+        <div class="font-bold text-lg">Categorical expenses</div>
+        <hr class="my-5">
+        <div id="cat-sum-table">
+            {% for categorical_sum in categorical_sums %}
+            <div class="flex justify-between px-5 py-3">
+                <span>{{ categorical_sum.category|title }}</span>
+                <span class="text-green-500">$ {{ categorical_sum.sum }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="flex gap-10">
+    <div class="w-1/2 shadow-lg rounded-lg p-5">
+        <h1 class="text-center font-bold text-xl">Expense Spread Across Categories</h1>
+        <img src="{% static pie_chart_url %}" alt="Expense Spread Across Categories" class="m-5" style="max-width: 100%;">
+    </div>
+    <div class="w-1/2 shadow-lg rounded-lg p-5">
+        <h1 class="text-center font-bold text-xl">Daily Expenses</h1>
+        <img src="{% static line_chart_url %}" alt="Daily Expenses" class="m-5" style="max-width: 100%;">
+    </div>
+</div>
+{% endblock %}

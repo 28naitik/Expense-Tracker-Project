@@ -1,0 +1,193 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8fafc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-item {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-item:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Add Expense Section */
+form {
+    background-color: #f9fafb;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 0; /* Remove bottom margin to align in one line */
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group div {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+/* Button Styling */
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Expenses Table Header */
+.expense-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.expense-header span {
+    flex: 1;
+    text-align: center;
+}
+
+/* Expenses Table Row */
+.expense-row {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 0px 12px; /* Reduced padding here */
+    border-bottom: 1px solid #ddd;
+    margin: 0; /* Important to remove unwanted margins */
+}
+
+.expense-row:hover {
+    background-color: #f1f1f1;
+}
+
+.expense-row span {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Total Expenses */
+.px-80 {
+    text-align: right;
+    padding: 10px 40px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+/* Flexbox */
+.flex {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.text-green-500 {
+    color: #4CAF50;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Chart Images */
+img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+    .form-container {
+        flex-direction: column;
+    }
+
+    .expense-header, .expense-row {
+        flex-direction: column;
+    }
+
+    .expense-header span, .expense-row span {
+        text-align: left;
+        padding: 10px 0;
+    }
+
+    .flex {
+        flex-direction: column;
+    }
+}
