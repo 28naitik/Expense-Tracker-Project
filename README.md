@@ -81,12 +81,16 @@ Or manually install the required packages:
 pip install django matplotlib
 
 4.Run Migrations:
+
 python manage.py makemigrations
+
 python manage.py migrate
 
 5.Create a Superuser (Optional for Admin Access):
+
 python manage.py createsuperuser
 Follow the prompts to set username, email, and password.
 
 6. Start the Development Server
+
 python manage.py runserver
